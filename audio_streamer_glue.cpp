@@ -231,6 +231,9 @@ public:
                     m_Files.insert(filePath);
                     jsonFile = cJSON_CreateString(filePath);
                     cJSON_AddItemToObject(jsonData, "file", jsonFile);
+                    // play audio back to channel
+                    switch_ivr_play_file(session, NULL, filePath, NULL);
+                    switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_INFO, "(%s) playing\n", filePath);
                 }
 
                 if(jsonFile) {
