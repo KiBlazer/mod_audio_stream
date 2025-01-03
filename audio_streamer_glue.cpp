@@ -250,6 +250,11 @@ public:
                 switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "(%s) processMessage - no data in streamAudio\n", m_sessionId.c_str());
             }
         }
+        // stop play
+        if(jsType && strcmp(jsType, "response.created") == 0) {
+            switch_core_session_stop_media(session);
+            switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_INFO, "stop play\n");
+        }
         cJSON_Delete(json);
         return status;
     }
